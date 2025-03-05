@@ -28,6 +28,7 @@ from functools import lru_cache
 from http.client import responses
 import http.cookies
 import re
+from typing import Match
 from ssl import SSLError
 import time
 import unicodedata
@@ -1055,7 +1056,7 @@ def qs_to_qsl(qs: Dict[str, List[AnyStr]]) -> Iterable[Tuple[str, AnyStr]]:
 _unquote_sub = re.compile(r"\\(?:([0-3][0-7][0-7])|(.))").sub
 
 
-def _unquote_replace(m: re.Match) -> str:
+def _unquote_replace(m: Match) -> str:
     if m[1]:
         return chr(int(m[1], 8))
     else:
